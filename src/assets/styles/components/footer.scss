@@ -1,0 +1,161 @@
+@import '../base/reset.scss';
+@import '../themes/variable.scss';
+@import '../helpers/mixin.scss';
+
+/* 通用底部 */
+.footerbar {
+    color: #999;
+    font-size: 14px;
+    /* margin-top: 50px; */
+    background:#24262b url("~@img/footerBg.png") no-repeat center bottom;
+    background-size: 1920px;
+    min-width: 1200px;
+}
+.footerbar a, .friendly-link a {
+    text-decoration: none;
+    cursor: pointer;
+}
+.friendly-link a {
+    width: 7em;
+    color: #666666;
+    font-size: 12px;
+}
+.friendly-link a:hover {
+    color: #C8201E;
+}
+.footerbar a, .footerbar .copy span{
+    color: #999;
+    padding:0 8px;
+}
+.footerbar a:hover {
+    color: #ddd;
+}
+.footerbar .section{
+    width: 1200px;
+    overflow: hidden;
+    padding:30px 0;
+    border-bottom: 1px solid #666;
+}
+.friendly-link {
+    background: #FFFFFF;
+}
+.friendly-link.not-bg {
+    background: transparent;
+}
+.friendly-link .section .fooTab span{
+    display: block;
+    float: left;
+    padding:0 20px;
+    margin-right: 10px;
+    border: 1px solid #E5E5E5;
+    border-radius: 4px;
+    color: #999999;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+}
+.friendly-link .section .fooTab span.focus{
+    background: #C8201E;
+    color: #FFFFFF;
+}
+.friendly-link .section .fooTab span.QQJT{
+    padding:0;
+    display: block;
+    // background: url('~@img/images/qqjt.png') no-repeat;
+    width: 90px;
+    height: 30px;
+}
+.friendly-link .section .fooTab span.QQJT:hover{
+    // background: url('~@img/images/qqjtHover.png') no-repeat;
+}
+.friendly-link .section .fooYqLink p {
+    float: left;
+    width: 1200px;
+    padding-bottom: 17px;
+}
+.friendly-link .section .fooTabLink div a,.friendly-link .section .fooYqLink p a{
+    float: left;
+    overflow: hidden;
+    margin-right: 25px;
+    width: 7em;
+    line-height: 14px;
+    margin-top: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.footer-tab-item {
+    box-sizing: border-box;
+    position: relative;
+    display: none;
+    padding-bottom: 17px;
+}
+.footer-tab-item.active {
+    display: block;
+}
+.footer-tab-item.has-more {
+    overflow: hidden;
+    max-height: 79px;
+}
+.footer-tab-item.is-open {
+    max-height: initial;
+}
+.footer-tab-item-more {
+    position: absolute;
+    right: 0;
+    bottom: 17px;
+    border: none;
+    background: transparent;
+    color: #C8201E;
+    font-size: 14px;
+}
+.footer-tab-container {
+    width: 1090px;
+}
+.footerbar .copy{
+    text-align: center;
+    padding: 25px 0 5px;
+}
+.footerbar .copy p{
+    color:#666;
+    line-height: 14px;
+    margin-top: 12px;
+}
+.footerbar .copy p:first-child{
+    margin-top: 0;
+}
+
+.rightBar{
+    position:fixed;
+    right:10px;
+    bottom:64px;
+    z-index:121;
+}
+.rightBar .btn{
+    width:60px;
+    height:60px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    border:1px solid #e6e6e6;
+    margin-bottom:4px;
+    cursor:pointer;
+    position:relative;
+    display: block;
+}
+.rBarShow{
+    background-color:#fff;
+    position:absolute;
+    right:64px;
+    top:0;
+    display:none;
+}
+.rightBar .btnTop{
+    display: none;
+}
+.rightBar .btn:hover{
+    -webkit-box-shadow: 0 0 8px rgba(102,120,128,0.4);
+    -moz-box-shadow: 0 0 8px rgba(102,120,128,0.4);
+    box-shadow: 0 0 8px rgba(102,120,128,0.4);
+}
+/* 通用底部end */

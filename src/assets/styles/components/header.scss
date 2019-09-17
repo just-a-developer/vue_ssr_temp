@@ -1,0 +1,373 @@
+@import '../base/reset.scss';
+@import '../themes/variable.scss';
+@import '../helpers/mixin.scss';
+
+/* 顶部导航条 */
+.list-topbar {
+    position: relative;
+    z-index: 999;
+    background: #363C40;
+    height: 30px;
+    color: #999;
+    font-size: 14px;
+}
+.list-topbar-container {
+    overflow: visible;
+    height: 100%;
+}
+.list-topbar-nav {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    float: left;
+    line-height: 1;
+}
+.list-topbar-nav a, .list-topbar-nav a:visited {
+    display: inline-block;
+    color: #999999;
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 1;
+}
+.list-topbar-nav a:not(:last-child) {
+    margin-right: 30px;
+}
+.list-topbar-nav a:hover {
+    color: #FFFFFF;
+}
+.list-topbar-right {
+    position: relative;
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list-topbar-right li {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    padding: 0 10px;
+    line-height: 30px;
+    cursor: pointer;
+}
+.list-topbar-right li a, .list-topbar-right li a:visited {
+    display: inline-block;
+    color: #999999;
+    text-decoration: none;
+}
+.list-topbar-right li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    height: 50%;
+    border-right: 1px #999999 solid;
+}
+.list-topbar-right li a:hover {
+    color: #FFFFFF;
+}
+.list-topbar-qr-wrapper {
+    position: relative;
+}
+.list-topbar-qr-wrapper > a::after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-left: 8px;
+    margin-top: -5px;
+    border-style: solid;
+    border-color: transparent #999999 #999999 transparent;
+    border-width: 1px;
+    transform: rotateZ(45deg);
+    vertical-align: middle;
+}
+.list-topbar-qr-wrapper:hover > a::after {
+    border-color: transparent #FFFFFF #FFFFFF transparent;
+}
+.list-topbar-qr-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    width: 530px;
+    padding: 15px;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0 7px 12px #c0c2cc;
+    -moz-box-shadow: 0 7px 12px #c0c2cc;
+    box-shadow: 0 7px 12px #c0c2cc;
+}
+.list-topbar-qr-wrapper:hover .list-topbar-qr-container {
+    display: block!important;
+}
+.list-topbar-qr-a {
+    cursor: pointer;
+}
+.list-topbar-qr-item {
+    float: left;
+    width: 25%;
+}
+.list-topbar-qr-item img {
+    display: block;
+    margin: auto;
+}
+.list-topbar-qr-item p {
+    margin: 8px auto 2px;
+    text-align: center;
+    line-height: 1;
+}
+/* 顶部导航条end */
+
+
+/* 通用主导航条 */
+.c-navbar {
+    position: relative;
+    /* z-index: 99; */
+    background-color: #F8F8F8;
+}
+.c-navbar .container {
+    position: relative;
+    z-index: 9;
+}
+.c-navbar-row {
+    position: relative;
+    z-index: 9;
+    height: 92px;
+}
+.c-navbar-left {
+    display: inline-block;
+    vertical-align: middle;
+}
+.c-topbar-logo-href {
+    display: inline-block;
+    vertical-align: middle;
+}
+.c-topbar-logo-href img {
+    margin: 0;
+    vertical-align: middle;
+}
+.c-navbar-position {
+    position: relative;
+    display: inline-block;
+    /* height: 100%; */
+    margin-left: 20px;
+    /* vertical-align: middle; */
+}
+.c-navbar-position-name {
+    position: relative;
+    z-index: 3000;
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    background: url(../img/rentout/black.png) right 10px center no-repeat;
+    color: #999999;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-indent: -10px;
+}
+.c-navbar-position-container {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index: 2999;
+    display: none;
+    width: 400px;
+    margin-top: 15px;
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    background-color: #FFFFFF;
+}
+.c-navbar-position-cuur {
+    padding: 24px 20px 0;
+    color: #dd2534;
+    font-size: 14px;
+}
+.c-navbar-position-list {
+    margin: 0;
+    padding: 24px 20px;
+    color: #666666;
+    font-size: 13px;
+    list-style: none;
+}
+.c-navbar-position-list li {
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+.c-navbar-position-list li:hover, .c-navbar-position-list li a:hover {
+    color: #dd2534;
+}
+.c-navbar-position-list li a {
+    text-decoration: none;
+    color: #666666;
+}
+.c-navbar-position:hover {
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+.c-navbar-position:hover .c-navbar-position-name {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+}
+.c-navbar-position:hover .c-navbar-position-container {
+    display: block;
+}
+.c-main-nav {
+    overflow: hidden;
+    display: inline-block;
+    margin-left: 30px;
+    font-size: 0;
+}
+.c-main-nav-item, .c-main-nav-item:visited {
+    display: inline-block;
+    color: #666666;
+    font-size: 16px;
+    text-decoration: none;
+}
+.c-main-nav-item:not(:last-child) {
+    margin-right: 20px;
+}
+.c-main-nav-item.active {
+    color: #C8201E;
+}
+.c-navbar-search {
+    position: relative;
+    width: 780px;
+    margin: 0 0 25px;
+    border-radius: 2px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.08);
+}
+.c-navbar-search-input {
+    box-sizing: border-box;
+    float: left;
+    width: 683px;
+    height: 45px;
+    padding: 13px 15px;
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background: transparent;
+    color: #333333;
+    font-size: 14px;
+}
+.c-navbar-search-btn {
+    box-sizing: border-box;
+    float: left;
+    width: 97px;
+    height: 45px;
+    padding: 10px 17px 10px 46px;
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: #C8201E url(../img/icons/search_for.png) 20px center no-repeat;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+.c-navbar-search-btn:hover {
+    background-color: #DD2534;
+}
+.c-navbar-qrcode {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 19;
+    transform: translateY(-50%);
+}
+.c-navbar-qrcode-label {
+    display: inline-block;
+    padding-left: 30px;
+    background: url(../img/icons/code_2.png) left center no-repeat;
+    color: #333333;
+    font-size: 16px;
+    cursor: pointer;
+}
+.c-navbar-qrcode-img-wrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2999;
+    margin-top: 12px;
+    padding: 25px 21px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(102,120,128,0.4);
+    background: #FFFFFF;
+}
+.c-navbar-qrcode:hover .c-navbar-qrcode-img-wrapper {
+    display: block;
+}
+.c-navbar-qrcode-img-wrapper::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-width: 8px;
+    border-color: transparent transparent #FFFFFF transparent;
+}
+.c-navbar-qrcode-img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 0;
+    vertical-align: middle;
+}
+.c-navbar-qrcode-desc {
+    margin: 15px auto 7px;
+    color: #333333;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+}
+.c-navbar-qrcode-tip {
+    margin: 0;
+    color: #999999;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+}
+.c-breadcrumb-bar {
+    background: #FFFFFF;
+}
+.c-breadcrumb {
+    display: block;
+    padding: 17px 0;
+    font-size: 12px;
+    line-height: 1;
+}
+.c-breadcrumb-item, .c-breadcrumb-item:visited {
+    display: inline-block;
+    color: #3F3F3F;
+    text-decoration: none;
+}
+.c-breadcrumb-item:not(span)::after {
+    content: ">";
+    display: inline-block;
+}
+/* .c-breadcrumb-item:last-of-type {
+    color: #999999;
+    pointer-events: none;
+} */
+.c-breadcrumb a.c-breadcrumb-item{
+    color: #3F3F3F ;
+    pointer-events: initial;
+}
+.c-breadcrumb a.c-breadcrumb-item:hover {
+    color: #dd2534;
+}
+.c-breadcrumb span{
+    color: #999999;
+    pointer-events: none;
+}
+/* 通用主导航条end */
