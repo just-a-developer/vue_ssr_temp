@@ -44,28 +44,22 @@ module.exports = function setupDevServer(app, templatePath, cb) {
     clientConfig.entry.app = ['webpack-hot-middleware/client', clientConfig.entry.app]
     clientConfig.output.filename = '[name].js'
     clientConfig.plugins.push(
+
+        // 模块热替换
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     )
 
     // dev middleware
     const clientCompiler = webpack(clientConfig)
-    const devMiddleware = webpackDev(clientCompiler, {
+    const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
         publicPath: clientConfig.output.publicPath,
         noInfo: true
     })
 
-    app.use(async (ctx, next) => {
-        await devMiddleware(ctx.req, {
-            end: (content) => {
-                ctx.body = content
-            },
-            setHeader: (name, value) => {
-                ctx.set(name, value)
-            }
-        }, next)
-    })
-
+    app.use(devMiddleware)
+    
     clientCompiler.plugin('done', stats => {
         stats = stats.toJson()
         stats.errors.forEach(err => console.error(err))
@@ -78,20 +72,9 @@ module.exports = function setupDevServer(app, templatePath, cb) {
         update()
     })
 
-    const hotMiddleware = webpackHot(clientCompiler, { heartbeat: 5000 });
-
     // hot middleware
-    app.use(async (ctx, next) => {
-        let stream = new PassThrough()
-        ctx.body = stream
-        await hotMiddleware(ctx.req, {
-            write: stream.write.bind(stream),
-            writeHead: (status, headers) => {
-                ctx.status = status
-                ctx.set(headers)
-            }
-        }, next)
-    })
+    app.use(require('webpack-hot-middleware')(clientCompiler, { heartbeat: 5000 }))
+
 
     // watch and update server renderer
     const serverCompiler = webpack(serverConfig)

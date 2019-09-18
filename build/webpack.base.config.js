@@ -17,7 +17,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "../dist"),
         publicPath: "/dist/",
-        filename: "[name].[chunkhash].js"
+        filename: "js/[name].[chunkhash].js"
     },
     resolve: {
         extensions: [".js", ".vue", ".json", ".sass", ".scss"],
@@ -50,21 +50,11 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(sass|scss|css)$/,
-                use: [
-                    // miniCssExtractPlugin.loader,
-                    // 'style-loader',
-                    'vue-style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
-            },
-            {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: '[name].[ext]?[hash]'
+                    name: 'img/[name].[ext]?[hash]'
                 }
             },
             {
@@ -92,9 +82,6 @@ module.exports = {
                 sourceMap: true
             }),
             new webpack.optimize.ModuleConcatenationPlugin(),
-            new miniCssExtractPlugin({
-                filename: 'common.[contenthash:8].css'
-            }),
         ]
         : [
             new VueLoaderPlugin(),

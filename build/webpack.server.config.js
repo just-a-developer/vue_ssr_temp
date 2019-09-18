@@ -4,21 +4,29 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const resolve = file => path.resolve(__dirname, file)
 
-module.exports = merge(base, {
+let config = merge(base, {
     target: 'node',
-    devtool: '#source-map',
     entry: resolve('../src/entry/entry-server.js'),
     output: {
         filename: 'server-bundle.js',
         libraryTarget: 'commonjs2'
     },
-    resolve: {
-        alias: {
-            'create-api': './create-api-server.js'
-        }
+    module: {
+        rules: [
+            {
+                test: /\.(sass|scss|css)$/,
+                use: [
+                    'style-loader',
+                    'vue-style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
+        ]
     },
     // https://webpack.js.org/configuration/externals/#externals
     // https://github.com/liady/webpack-node-externals
@@ -34,3 +42,13 @@ module.exports = merge(base, {
         new VueSSRServerPlugin()
     ]
 })
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['vue-ssr-server-bundle.json'],
+        })
+    )
+}
+
+module.exports = config

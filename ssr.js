@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const express = require("express")
 const koa = require("koa")
 const koaRouter = require("koa-router")
 const LRU = require('lru-cache')
@@ -11,7 +12,7 @@ const isProd = process.env.NODE_ENV === 'production'
 // const useMicroCache = process.env.MICRO_CACHE !== 'false'
 
 const templatePath = resolve('./src/index.template.html')
-let app = new koa();
+let app = express();
 let renderer
 let readyPromise
 
@@ -45,7 +46,7 @@ if (isProd) {
         clientManifest
     })
 } else {
-    // 在开发中:使用watch和hot-reload设置开发服务器，
+    // 在开发中:使用 watch 和 hot-reload 设置开发服务器，
     // 在bundle / index模板更新上创建一个新的渲染器。
     readyPromise = require('./build/setup-dev-server')(
         app,
@@ -56,60 +57,46 @@ if (isProd) {
     )
 }
 
-async function render(ctx, next) {
+function render(req, res) {
     const s = Date.now()
 
     res.setHeader("Content-Type", "text/html")
-    res.setHeader("Server", serverInfo)
 
     const handleError = err => {
         if (err.url) {
             res.redirect(err.url)
         } else if (err.code === 404) {
-            ctx.body = "'404 | Page Not Found'";
+            res.status(404).send('404 | Page Not Found')
         } else {
-            ctx.body = "500 | Internal Server Error";
-            console.error(`error during render : ${ctx.url}`)
+            // Render Error Page or Redirect
+            res.status(500).send('500 | Internal Server Error')
+            console.error(`error during render : ${req.url}`)
             console.error(err.stack)
         }
     }
 
     const context = {
         title: 'Vue HN 2.0', // default title
-        url: ctx.url
+        url: req.url
     }
-
     renderer.renderToString(context, (err, html) => {
         console.log("渲染完毕");
         console.log(err, html);
         if (err) {
             return handleError(err)
         }
-
-        ctx.body = html;
-
+        res.end(html)
         if (!isProd) {
             console.log(`whole request: ${Date.now() - s}ms`)
         }
     })
 }
 
-let router = new koaRouter();
+app.get('*', isProd ? render : (req, res) => {
+    readyPromise.then(() => render(req, res))
+})
+
 const port = process.env.PORT || 8080
-
-router.get("/index", async (ctx, next) => {
-    ctx.body = "进入 index";
-})
-
-router.get('*', isProd ? render : async (ctx, next) => {
-    readyPromise.then(() => render(ctx, next))
-})
-
-app.use(router.routes());
-
-app.on("error", err => {
-    console.log(err);
-})
 
 app.listen(port, () => {
     console.log(`server started at localhost:${port}`)
