@@ -8,23 +8,13 @@ export function createRouter () {
         mode: "history",
         routes: [
             {
-                path: '/',
-                name: 'home',
-                component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-            },
-            {
-                path: '/about',
-                name: 'about',
-                component: () => import(/* webpackChunkName: "home" */ '../views/About.vue')
-            },
-            {
-                path: '/index',
+                path: '/:city?/',
                 name: 'index',
                 component: () => import(/* webpackChunkName: "index" */ '../views/Index.vue')
             },
             {
                 path: '*',
-                redirect: { name: "home" }
+                redirect: { name: "index" }
             }
         ]
     })

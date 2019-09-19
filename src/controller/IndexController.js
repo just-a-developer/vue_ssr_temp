@@ -13,9 +13,13 @@ class IndexController extends Controller {
         })
     }
 
-    getList () {
+    getList (params) {
         return new Promise((resolve, reject) => {
-            
+            this.axios({
+
+            }).then(({ data: result }) => {
+
+            })
         })
     }
 }
