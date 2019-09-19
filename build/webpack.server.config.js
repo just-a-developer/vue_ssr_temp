@@ -2,9 +2,11 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
+const autoprefixer = require("autoprefixer")
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const util = require("./util.js")
 
 const resolve = file => path.resolve(__dirname, file)
 
@@ -20,10 +22,13 @@ let config = merge(base, {
             {
                 test: /\.(sass|scss|css)$/,
                 use: [
-                    'style-loader',
-                    'vue-style-loader',
-                    'css-loader',
-                    'sass-loader'
+                    util.generateLoader("vue-style", { sourceMap: true }),
+                    util.generateLoader("css", { sourceMap: true }),
+                    util.generateLoader("postcss", { 
+                        sourceMap: true,
+                        plugins: [autoprefixer({})]
+                    }),
+                    util.generateLoader("sass", { sourceMap: true }),
                 ]
             },
         ]
